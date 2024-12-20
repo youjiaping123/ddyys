@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阴阳师-移动端</title>
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/reset.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        .mobile-container {
+            width: 375px;
+            height: 812px;
+            background: #fff;
+            border-radius: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .mobile-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 12px solid #333;
+            border-radius: 40px;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 30px;
+            background: #333;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            z-index: 1001;
+        }
+
+        .mobile-content {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            background: #fff;
+            padding-top: 30px;
+        }
+
+        /* 顶部banner */
+        .banner {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-text {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .banner-text h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .banner-text p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* 内容区域 */
+        .section {
+            margin-bottom: 20px;
+            background: #fff;
+        }
+
+        .section-title {
+            padding: 15px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: #c4a06d;
+            margin-right: 10px;
+        }
+
+        .section-content {
+            padding: 0;
+        }
+
+        /* 图片卡片样式 */
+        .card {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .card:last-child {
+            margin-bottom: 0;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .card-text {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 8px 15px;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            z-index: 1002;
+            backdrop-filter: blur(5px);
+        }
+
+        .back-btn:hover {
+            background: rgba(0,0,0,0.8);
+        }
+
+        /* 滚动条 */
+        .mobile-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 标题装饰 */
+        .title-decoration {
+            display: inline-block;
+            width: 3px;
+            height: 16px;
+            background-color: #c4a06d;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">返回PC端</a>
+    <div class="mobile-container">
+        <div class="mobile-frame">
+            <div class="notch"></div>
+        </div>
+        <div class="mobile-content">
+            <div class="banner">
+                <img src="images/9c199568-ab72-4f27-afe1-462ca193955c.png" alt="阴阳师主题背景">
+                <div class="banner-text">
+                    <h1>平安世界，风雅之旅</h1>
+                    <p>网易和风幻想RPG手游</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span>平安世界</span>
+                </div>
+                <div class="section-content">
+                    <div class="card">
+                        <img src="images/370.png" alt="">
+                    </div>
+                    <div class="card">
+                        <img src="images/3701.png" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span>游戏攻略</span>
+                </div>
+                <div class="section-content">
+                    <div class="card">
+                        <img src="images/ebda40a6-c7e4-4483-bd0e-48427ef1dd42.png" alt="">
+                        <div class="card-text">月夕织梦 - 活动攻略</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span>同人手账</span>
+                </div>
+                <div class="section-content">
+                    <div class="card">
+                        <img src="images/636343c1-1786-41f4-a666-bc70e648b7b3.png" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span>试听盛宴</span>
+                </div>
+                <div class="section-content">
+                    <div class="card">
+                        <img src="images/62837329-6db0-4341-98cb-f023078dc8d4.png" alt="">
+                        <div class="card-text">妙笔绘世 墨倾山河</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    <span>泛娱乐</span>
+                </div>
+                <div class="section-content">
+                    <div class="card">
+                        <img src="images/74d00cea-10a1-4444-afb5-d944e903ab92.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
