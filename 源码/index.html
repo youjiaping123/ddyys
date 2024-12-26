@@ -541,7 +541,7 @@
 <body>
 <!--最外层的容器-->
 <div class="yys">
-    <!--��部开始-->
+    <!--头部开始-->
     <div class="header">
         <div class="menu">游戏全目录</div>
         <a href="#">
@@ -851,45 +851,32 @@
         const musicPlayer = document.querySelector('.music-disc');
         const audio = document.getElementById('bgMusic');
         let isPlaying = false;
-
-        // 优化音频加载
+        
         audio.preload = 'metadata';
         
-        // 初始化音乐播放器
         function initMusicPlayer() {
-            // 检查是否支持自动播放
             const playPromise = audio.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     isPlaying = true;
                     musicPlayer.classList.add('playing');
-                }).catch(error => {
-                    console.log("需要用户交互才能��放音频");
-                    isPlaying = false;
-                    musicPlayer.classList.remove('playing');
                 });
             }
         }
 
-        // 处理播放/暂停
         function togglePlay() {
             if (isPlaying) {
                 audio.pause();
                 musicPlayer.classList.remove('playing');
             } else {
-                audio.play().then(() => {
-                    musicPlayer.classList.add('playing');
-                }).catch(error => {
-                    console.log("播放失败:", error);
-                });
+                audio.play();
+                musicPlayer.classList.add('playing');
             }
             isPlaying = !isPlaying;
         }
 
-        // 事件监听
         musicPlayer.addEventListener('click', togglePlay);
         
-        // 音频事件处理
         audio.addEventListener('ended', () => {
             if (!audio.loop) {
                 isPlaying = false;
@@ -897,13 +884,6 @@
             }
         });
 
-        audio.addEventListener('error', (e) => {
-            console.log("音频加载错误:", e);
-            isPlaying = false;
-            musicPlayer.classList.remove('playing');
-        });
-
-        // 初始化
         initMusicPlayer();
     });
 </script>

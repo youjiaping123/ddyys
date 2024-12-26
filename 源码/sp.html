@@ -346,37 +346,27 @@
             const modalVideo = videoModal.querySelector('video');
             const closeModal = videoModal.querySelector('.close-modal');
 
-            // 为每个视频卡片生成预览图
             videoCards.forEach(card => {
                 const videoSrc = card.dataset.video;
                 const canvas = card.querySelector('canvas');
                 const tempVideo = document.createElement('video');
                 
                 tempVideo.src = videoSrc;
-                tempVideo.crossOrigin = 'anonymous'; // 如果视频在不同域
+                tempVideo.crossOrigin = 'anonymous';
                 
-                // 当视频加载完成后，在特定时间点捕获帧
                 tempVideo.addEventListener('loadeddata', function() {
-                    // 设置到视频30%处的时间点
                     tempVideo.currentTime = tempVideo.duration * 0.3;
                 });
                 
-                // 当视频跳转到指定时间点后
                 tempVideo.addEventListener('seeked', function() {
-                    // 设置canvas尺寸
                     canvas.width = tempVideo.videoWidth;
                     canvas.height = tempVideo.videoHeight;
-                    
-                    // 在canvas上绘制视频帧
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(tempVideo, 0, 0, canvas.width, canvas.height);
-                    
-                    // 清理临时视频元素
                     tempVideo.remove();
                 });
             });
 
-            // 打开视频弹窗
             videoCards.forEach(card => {
                 card.addEventListener('click', function() {
                     const videoSrc = this.dataset.video;
@@ -386,14 +376,12 @@
                 });
             });
 
-            // 关闭视频弹窗
             closeModal.addEventListener('click', function() {
                 modalVideo.pause();
                 modalVideo.src = '';
                 videoModal.style.display = 'none';
             });
 
-            // 点击弹窗外部关闭
             videoModal.addEventListener('click', function(e) {
                 if (e.target === videoModal) {
                     modalVideo.pause();
@@ -402,7 +390,6 @@
                 }
             });
 
-            // ESC键关闭弹窗
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && videoModal.style.display === 'flex') {
                     modalVideo.pause();
