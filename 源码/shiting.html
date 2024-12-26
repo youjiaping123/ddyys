@@ -10,115 +10,138 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/yys.css">
     <style>
-        /* 视听中心特定样式 */
         .shiting-center {
             width: 100%;
             min-width: 1280px;
-            background: #000;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(20, 20, 20, 0.9));
             padding: 50px 0;
             color: #fff;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .shiting-center::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("images/shishen_btn_bg_405a749.png") repeat;
+            opacity: 0.05;
+            pointer-events: none;
         }
 
         .shiting-header {
             width: 1200px;
             margin: 0 auto;
             text-align: center;
-            padding-bottom: 40px;
+            padding: 40px 0;
+            position: relative;
+        }
+
+        .shiting-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #c4a06d 20%, #e2c792 50%, #c4a06d 80%, transparent);
         }
 
         .shiting-header h1 {
-            font-size: 36px;
+            font-size: 48px;
             color: #c4a06d;
             margin-bottom: 20px;
+            font-family: "方正姚体";
+            text-shadow: 0 0 15px rgba(196, 160, 109, 0.3);
+            letter-spacing: 5px;
         }
 
         .shiting-header p {
-            font-size: 16px;
-            color: #999;
+            font-size: 18px;
+            color: #c4a06d;
             line-height: 1.6;
+            opacity: 0.8;
         }
 
         .shiting-container {
             width: 1200px;
             margin: 0 auto;
+            padding: 40px 0;
+            position: relative;
+            z-index: 1;
         }
 
         .shiting-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
             margin-bottom: 40px;
         }
 
         .shiting-item {
             position: relative;
             overflow: hidden;
-            border-radius: 10px;
-            transition: all 0.3s ease;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            background: rgba(196, 160, 109, 0.05);
+            padding: 20px;
+            border: 1px solid rgba(196, 160, 109, 0.1);
         }
 
         .shiting-item:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(196, 160, 109, 0.2);
+            border-color: rgba(196, 160, 109, 0.3);
+            background: rgba(196, 160, 109, 0.1);
         }
 
         .shiting-item img {
             width: 100%;
-            height: 200px;
+            height: 300px;
             object-fit: cover;
-            display: block;
+            border-radius: 10px;
+            transition: all 0.4s ease;
         }
 
-        .shiting-item-info {
-	position: absolute;
-	bottom: -335px;
-	left: -49px;
-	right: 0;
-	padding: 15px;
-	background: linear-gradient(transparent, rgba(0,0,0,0.8));
-	color: #C7A473;
-	height: 166px;
-	width: 810px;
+        .shiting-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .shiting-item a {
+            display: block;
+            text-decoration: none;
         }
 
         .shiting-item-title {
-            font-size: 16px;
-            margin-bottom: 5px;
-            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+            color: #c4a06d;
+            font-size: 24px;
+            font-family: "方正姚体";
+            position: relative;
+            padding-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        .shiting-item-desc {
-            font-size: 12px;
-            opacity: 0.8;
-        }
-
-        .play-btn {
-	position: absolute;
-	top: 33px;
-	left: 442px;
-	transform: translate(-50%, -50%);
-	width: 50px;
-	height: 50px;
-	background: rgba(196, 160, 109, 0.8);
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	opacity: 0;
-	transition: all 0.3s ease;
-        }
-
-        .shiting-item:hover .play-btn {
-            opacity: 1;
-        }
-
-        .play-btn::before {
+        .shiting-item-title::after {
             content: '';
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 10px 0 10px 15px;
-            border-color: transparent transparent transparent #fff;
-            margin-left: 5px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #c4a06d, transparent);
+            transition: all 0.4s ease;
+        }
+
+        .shiting-item:hover .shiting-item-title::after {
+            width: 80px;
         }
 
         /* 返回首页按钮 */
@@ -126,53 +149,90 @@
             position: fixed;
             top: 20px;
             left: 20px;
-            padding: 10px 20px;
-            background: #c4a06d;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #c4a06d, #e2c792);
             color: #fff;
             text-decoration: none;
-            border-radius: 20px;
-            font-size: 14px;
+            border-radius: 25px;
+            font-size: 16px;
             transition: all 0.3s ease;
             z-index: 1000;
+            box-shadow: 0 5px 15px rgba(196, 160, 109, 0.3);
         }
 
         .back-home:hover {
-            background: #a88756;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196, 160, 109, 0.4);
+            background: linear-gradient(45deg, #b3905d, #d1b681);
         }
-    .aa {
-	color: #C4A06D;
-	font-size: 60px;
-}
+
+        /* 音乐播放器位置调整 */
+        .music-player {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .music-disc {
+            background: linear-gradient(45deg, #c4a06d, #e2c792);
+        }
+
+        .music-control {
+            background: #fff;
+        }
+
+        .music-disc::before {
+            border-color: #fff;
+        }
     </style>
 </head>
 <body>
     <a href="index.html" class="back-home">返回首页</a>
 
     <div class="shiting-center">
-<div class="shiting-header">
+        <div class="shiting-header">
             <h1>视听盛宴</h1>
             <p>感受阴阳师的和风音乐魅力，聆听平安京的动人旋律</p>
         </div>
 
         <div class="shiting-container">
             <div class="shiting-grid">
-                <!-- 第一行 -->
+                <div class="shiting-item">
+                    <a href="yh.html">
+                        <img src="images/1366x768 (16).jpg" alt="原画壁纸">
+                        <div class="shiting-item-title">原画壁纸</div>
+                    </a>
+                </div>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<div class="shiting-item"><span class="aa"> <a href="yh.html">原画壁纸</a></span><img src="images/1366x768 (16).jpg" width="1366" height="768" alt=""/></div>            
+                <div class="shiting-item">
+                    <a href="yh.html">
+                        <img src="images/bed11493-5005-449e-8e05-19f0b69b7b0e.gif" alt="动态桌面">
+                        <div class="shiting-item-title">动态桌面</div>
+                    </a>
+                </div>
 
-<div class="shiting-item"><span class="aa"> <a href="yh.html">动态桌面</a></span><img src="images/bed11493-5005-449e-8e05-19f0b69b7b0e.gif" width="250" height="141" alt=""/></div>
-<p>&nbsp;</p>
-<p>
- <div class="shiting-item"><span class="aa"> <a href="sp.html">视频</a><img src="images/578f409a-e3ca-4c2f-95d4-c3e460bcfc08.gif" width="250" height="141" alt=""/></span></div>
- <div class="shiting-item"><span class="aa"><a href="yy.html">音乐</a><img src="images/1366x768 (1).jpg" width="1366" height="768" alt=""/></span></div></p>
-              
-               
-<!-- 音乐播放器 -->
+                <div class="shiting-item">
+                    <a href="sp.html">
+                        <img src="images/578f409a-e3ca-4c2f-95d4-c3e460bcfc08.gif" alt="视频">
+                        <div class="shiting-item-title">视频</div>
+                    </a>
+                </div>
+
+                <div class="shiting-item">
+                    <a href="yy.html">
+                        <img src="images/1366x768 (1).jpg" alt="音乐">
+                        <div class="shiting-item-title">音乐</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 音乐播放器 -->
     <div class="music-player">
-        <audio id="bgMusic" src="media/1.mp3" loop autoplay></audio>
+        <audio id="bgMusic" src="media/1.mp3" loop></audio>
         <div class="music-disc">
-            <img src="images/disc.png" alt="音乐">
             <div class="music-control"></div>
         </div>
     </div>
@@ -181,15 +241,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const musicPlayer = document.querySelector('.music-disc');
             const audio = document.getElementById('bgMusic');
-            let isPlaying = true;
-
-            musicPlayer.classList.add('playing');
-
-            audio.play().catch(function(error) {
-                console.log("Auto-play was prevented");
-                isPlaying = false;
-                musicPlayer.classList.remove('playing');
-            });
+            let isPlaying = false;
 
             musicPlayer.addEventListener('click', function() {
                 if (isPlaying) {
@@ -201,10 +253,7 @@
                 }
                 isPlaying = !isPlaying;
             });
-
-      
-          
-         
+        });
     </script>
 </body>
 </html> 
