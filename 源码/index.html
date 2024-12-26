@@ -9,6 +9,266 @@
     <link rel="icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/yys.css">
+    <style>
+        /* 全局样式优化 */
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* 导航样式优化 */
+        .nav {
+            background: linear-gradient(to right, rgba(196, 160, 109, 0.95), rgba(226, 199, 146, 0.95));
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 99;
+        }
+
+        .nav-wrap {
+            position: relative;
+            z-index: 100;
+        }
+
+        .nav-wrap li {
+            background: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-wrap li::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-wrap li:hover::before {
+            transform: translateX(0);
+        }
+
+        .nav-wrap li a {
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 下拉菜单优化 */
+        .submenu {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-top: 2px solid #c4a06d;
+            transform-origin: top;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-wrap li:hover .submenu {
+            transform: scaleY(1);
+        }
+
+        .submenu a {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .submenu a::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            width: 4px;
+            height: 4px;
+            background: #c4a06d;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .submenu a:hover::before {
+            opacity: 1;
+        }
+
+        /* Banner优化 */
+        .banner-box {
+            position: relative;
+        }
+
+        .banner-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            pointer-events: none;
+        }
+
+        .banner-content {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 1;
+        }
+
+        .banner-text h1 {
+            font-size: 48px;
+            font-family: "方正姚体";
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .banner-text p {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.8s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 移动端按钮优化 */
+        .mobile-btn {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            margin-left: 20px;
+            height: 36px;
+            background: linear-gradient(135deg, #c4a06d, #8b6b43);
+            border: 1px solid rgba(255, 215, 155, 0.3);
+            border-radius: 18px;
+            color: #fff1e6;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(196, 160, 109, 0.3);
+            z-index: 100;
+            white-space: nowrap;
+        }
+
+        .mobile-btn:hover {
+            background: linear-gradient(135deg, #d4b17d, #9c7b53);
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 6px 20px rgba(196, 160, 109, 0.4);
+            border-color: rgba(255, 215, 155, 0.5);
+        }
+
+        .mobile-btn span {
+            display: inline-block;
+            line-height: 36px;
+            vertical-align: middle;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .mobile-icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            background: url('../images/mobile-icon.png') no-repeat center;
+            background-size: contain;
+            filter: brightness(0) invert(1);
+            vertical-align: middle;
+            opacity: 0.9;
+        }
+
+        .mobile-btn:hover .mobile-icon {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* 音乐播放器优化 */
+        .music-player {
+            position: fixed;
+            top: 20px;
+            right: 25px;
+            z-index: 1000;
+            width: 36px;
+            height: 36px;
+        }
+
+        .music-disc {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .music-disc:hover {
+            transform: scale(1.1);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .music-disc::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: ripple 2s linear infinite;
+        }
+
+        .music-disc::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
 <!--最外层的容器-->
@@ -26,7 +286,6 @@
                 <div class="music-control"></div>
             </div>
         </div>
-        <div class="sale">25元专属券限时领</div>
     </div>
     <!--头部结束-->
     <!--导航开始-->
@@ -57,7 +316,7 @@
                     <a href="#">式神图鉴</a>
                     <div class="submenu">
                         <a href="#">SSR式神</a>
-                        <a href="#">SR式神</a>
+                        <a href="#">SR��神</a>
                         <a href="#">R式神</a>
                         <a href="#">N式神</a>
                     </div>
@@ -173,7 +432,7 @@
                     <div>
                         <a href="#">
                             <img src="images/ebda40a6-c7e4-4483-bd0e-48427ef1dd42.png" alt="">
-                            <span>月夕织梦</span>
+                            <span>�����夕织梦</span>
                             <span>活动攻略</span>
                         </a>
                     </div>
