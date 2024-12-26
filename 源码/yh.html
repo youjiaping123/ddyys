@@ -1,100 +1,206 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Untitled Document</title>
-<style type="text/css">
-.aa {
-	color: #000000;
-	text-align: center;
-	font-size: 120px;
-	font-family: "方正姚体";
-	background-image: url(../%E6%BA%90%E7%A0%81/images/shishen_btn_bg_405a749.png);
-}
-body {
-	background: none;
-}
-a:link {
-	text-decoration: none;
-}
-a:visited {
-	text-decoration: none;
-}
-a:hover {
-	text-decoration: none;
-}
-a:active {
-	text-decoration: none;
-}
-#form1 {
-	background: none;
-}
-</style>
-<link href="#bb.css" rel="stylesheet" type="text/css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原画壁纸-阴阳师</title>
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/yys.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(20, 20, 20, 0.9));
+            min-height: 100vh;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
 
-<body background="images/shishen_btn_bg_405a749.png">
-<form id="form1" name="form1" method="post">
-  <p>&nbsp;</p>
-  <table width="1200" height="1044" border="0" align="center" cellspacing="0" style="">
-    <tbody>
-      <tr bgcolor="#E1ACAC" style="text-align: center">
-        <td height="222" colspan="3" valign="middle" bgcolor="#FFFFFF" class="aa"><a href="yh.html"> 原画壁纸</a></td>
-      </tr>
-      <tr style="text-align: center">
-        <td colspan="2" valign="middle" bgcolor="#FFFFFF"><p>&nbsp;</p>
-          <p>
-            <embed src="images/1366x768.jpg" width="683" height="332"></embed>
-          </p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>          <p>&nbsp;</p>        </td>
-        <td width="359" valign="middle" bgcolor="#FFFFFF"><p><img src="images/index.html" width="1366" height="768" alt=""/></p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>          <p>&nbsp;</p>        </td>
-      </tr>
-      <tr bgcolor="#E1ACAC" style="text-align: center">
-        <td width="337" height="98" valign="middle" bgcolor="#FFFFFF"><p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>          <p>&nbsp;</p>        </td>
-        <td colspan="2" valign="middle" bgcolor="#FFFFFF"><p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>          <p>&nbsp;</p>        </td>
-      </tr>
-      <tr style="text-align: center">
-        <td height="119" colspan="2" valign="middle" bgcolor="#FFFFFF"><p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>          <p>&nbsp;</p>        </td>
-        <td valign="middle" bgcolor="#FFFFFF"><p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>          <p>&nbsp;</p>        </td>
-      </tr>
-      <tr bgcolor="#E1ACAC" style="text-align: center">
-        <td height="131" valign="middle" bgcolor="#FFFFFF"><p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>          <p>&nbsp;</p>        </td>
-        <td colspan="2" valign="middle" bgcolor="#FFFFFF"><p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>          <p>&nbsp;</p>        </td>
-      </tr>
-    </tbody>
-  </table>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-</form>
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("images/shishen_btn_bg_405a749.png") repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .wallpaper-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-title {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .page-title h1 {
+            color: #c4a06d;
+            font-size: 48px;
+            font-family: "方正姚体", sans-serif;
+            text-shadow: 0 0 15px rgba(196, 160, 109, 0.3);
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #c4a06d 20%, #e2c792 50%, #c4a06d 80%, transparent);
+        }
+
+        .wallpaper-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .wallpaper-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .wallpaper-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(196, 160, 109, 0.2);
+        }
+
+        .wallpaper-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .wallpaper-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .wallpaper-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: #fff;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .wallpaper-item:hover .wallpaper-info {
+            transform: translateY(0);
+        }
+
+        .wallpaper-info h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #c4a06d;
+        }
+
+        .wallpaper-info p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .back-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #c4a06d, #e2c792);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(196, 160, 109, 0.3);
+        }
+
+        .back-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196, 160, 109, 0.4);
+            background: linear-gradient(45deg, #b3905d, #d1b681);
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background: rgba(196, 160, 109, 0.2);
+            color: #c4a06d;
+            text-decoration: none;
+            border-radius: 20px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: rgba(196, 160, 109, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <a href="shiting.html" class="back-home">返回视听中心</a>
+    
+    <div class="wallpaper-container">
+        <div class="page-title">
+            <h1>原画壁纸</h1>
+        </div>
+        
+        <div class="wallpaper-grid">
+            <div class="wallpaper-item">
+                <img src="images/1366x768.jpg" alt="阴阳师壁纸">
+                <div class="wallpaper-info">
+                    <h3>平安世界</h3>
+                    <p>和风幻想世界的绝美画卷</p>
+                    <a href="images/1366x768.jpg" download class="download-btn">下载壁纸</a>
+                </div>
+            </div>
+            
+            <div class="wallpaper-item">
+                <img src="images/1366x768 (16).jpg" alt="阴阳师壁纸">
+                <div class="wallpaper-info">
+                    <h3>妖怪之旅</h3>
+                    <p>探索平安京的奇妙冒险</p>
+                    <a href="images/1366x768 (16).jpg" download class="download-btn">下载壁纸</a>
+                </div>
+            </div>
+            
+            <div class="wallpaper-item">
+                <img src="images/1366x768 (1).jpg" alt="阴阳师壁纸">
+                <div class="wallpaper-info">
+                    <h3>式神物语</h3>
+                    <p>独特的式神世界观</p>
+                    <a href="images/1366x768 (1).jpg" download class="download-btn">下载壁纸</a>
+                </div>
+            </div>
+            
+            <div class="wallpaper-item">
+                <img src="images/1366x768 (2).jpg" alt="阴阳师壁纸">
+                <div class="wallpaper-info">
+                    <h3>平安风光</h3>
+                    <p>唯美和风意境</p>
+                    <a href="images/1366x768 (2).jpg" download class="download-btn">下载壁纸</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

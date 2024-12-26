@@ -1,86 +1,416 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Untitled Document</title>
-<style type="text/css">
-.aa {
-	color: #000000;
-	text-align: center;
-	font-size: 100px;
-	font-family: "方正姚体";
-	background-image: url(images/shishen_btn_bg_405a749.png);
-}
-body {
-	background: none;
-}
-a:link {
-	text-decoration: none;
-}
-a:visited {
-	text-decoration: none;
-}
-a:hover {
-	text-decoration: none;
-}
-a:active {
-	text-decoration: none;
-}
-#form1 {
-	background: none;
-}
-</style>
-<link href="#bb.css" rel="stylesheet" type="text/css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频中心 - 阴阳师</title>
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/reset.css">
+    <style>
+        :root {
+            --primary-color: #e2c792;
+            --secondary-color: #c4a06d;
+            --bg-dark: #1a1a1a;
+            --text-light: #ffffff;
+        }
 
-<body background="images/shishen_btn_bg_405a749.png">
-<form id="form1" name="form1" method="post">
-  <p>&nbsp;</p>
-  <table width="1200" height="1897" border="0" align="center" cellspacing="0" style="">
-    <tbody>
-      <tr bgcolor="#E1ACAC" style="text-align: center">
-        <td height="186" colspan="3" valign="middle" bgcolor="#FFFFFF" class="aa">视频</td>
-      </tr>
-      <tr style="text-align: center">
-        <td colspan="2" valign="middle" ><p>
-            <embed src="images/8周年CG.mp4" width="687" height="380"></embed>
-          </p>        </td>
-        <td width="700" valign="middle" ><p class="aa">8周年CG </p></td>
-      </tr>
-      <tr bgcolor="#E1ACAC" style="text-align: center">
-        <td width="700" valign="middle" bgcolor="#F0F0F0" ><p class="aa">千面<br>
-      摘星 </p></td>
-        <td colspan="2" valign="middle" bgcolor="#FFFFFF"><p>
-            <embed src="images/千面摘星.mp4" width="701" height="441"></embed>
-        </p>        </td>
-      </tr>
-      <tr style="text-align: center">
-        <td height="119" colspan="2" valign="middle" bgcolor="#FFFFFF"><p>
-            <embed src="images/踏雪寻踪.mp4" width="701" height="441"></embed>
-          </p>        </td>
-        <td valign="middle" bgcolor="#FFFFFF"><p class="aa">踏雪<br>
-        寻踪 </p></td>
-      </tr>
-      <tr bgcolor="#E1ACAC" style="text-align: center">
-        <td height="443" valign="middle" bgcolor="#FFFFFF"><p class="aa">神醉<br>
-            
-        绮宴 </p></td>
-        <td colspan="2" valign="middle" bgcolor="#FFFFFF"><p>
-            <embed src="images/神醉绮宴.mp4" width="701" height="441"></embed>
-          </p>        </td>
-      </tr>
-    </tbody>
-  </table>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-</form>
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: "Microsoft YaHei", sans-serif;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .background-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/pattern-bg.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            font-family: "方正姚体", sans-serif;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--secondary-color) 20%, 
+                var(--primary-color) 50%, 
+                var(--secondary-color) 80%, 
+                transparent
+            );
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(226, 199, 146, 0.1);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-thumbnail canvas {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover .video-thumbnail canvas {
+            transform: scale(1.05);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(226, 199, 146, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-card:hover .play-button {
+            opacity: 1;
+        }
+
+        .play-button::after {
+            content: '';
+            border-style: solid;
+            border-width: 10px 0 10px 20px;
+            border-color: transparent transparent transparent var(--text-light);
+            margin-left: 5px;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-title {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .video-description {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 2rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(226, 199, 146, 0.2);
+        }
+
+        /* 视频播放弹窗 */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 1200px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -2rem;
+            right: -2rem;
+            width: 2rem;
+            height: 2rem;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-video {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .back-button {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-pattern"></div>
+    <a href="shiting.html" class="back-button">返回视听中心</a>
+
+    <div class="container">
+        <header class="header">
+            <h1>视频中心</h1>
+        </header>
+
+        <div class="video-grid">
+            <!-- 视频卡片1 -->
+            <div class="video-card" data-video="images/8周年CG.mp4">
+                <div class="video-thumbnail">
+                    <canvas></canvas>
+                    <div class="play-button"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">八周年CG</h3>
+                    <p class="video-description">阴阳师八周年庆典，精彩CG回顾八年精彩时刻。</p>
+                    <div class="video-meta">
+                        <span class="video-date">2023-12-20</span>
+                        <span class="video-duration">1:53</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 视频卡片2 -->
+            <div class="video-card" data-video="images/千面摘星.mp4">
+                <div class="video-thumbnail">
+                    <canvas></canvas>
+                    <div class="play-button"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">千面摘星</h3>
+                    <p class="video-description">全新式神降临，演绎平安京的奇幻故事。</p>
+                    <div class="video-meta">
+                        <span class="video-date">2023-12-15</span>
+                        <span class="video-duration">2:30</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 视频卡片3 -->
+            <div class="video-card" data-video="images/踏雪寻踪.mp4">
+                <div class="video-thumbnail">
+                    <canvas></canvas>
+                    <div class="play-button"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">踏雪寻踪</h3>
+                    <p class="video-description">冬日特别篇，雪中的神秘之旅。</p>
+                    <div class="video-meta">
+                        <span class="video-date">2023-12-10</span>
+                        <span class="video-duration">2:15</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 视频卡片4 -->
+            <div class="video-card" data-video="images/神醉绮宴.mp4">
+                <div class="video-thumbnail">
+                    <canvas></canvas>
+                    <div class="play-button"></div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">神醉绮宴</h3>
+                    <p class="video-description">绮丽盛宴，神秘物语徐徐展开。</p>
+                    <div class="video-meta">
+                        <span class="video-date">2023-12-05</span>
+                        <span class="video-duration">2:45</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 视频播放弹窗 -->
+    <div class="video-modal">
+        <div class="modal-content">
+            <div class="close-modal">×</div>
+            <video class="modal-video" controls>
+                <source src="" type="video/mp4">
+                您的浏览器不支持视频播放。
+            </video>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoCards = document.querySelectorAll('.video-card');
+            const videoModal = document.querySelector('.video-modal');
+            const modalVideo = videoModal.querySelector('video');
+            const closeModal = videoModal.querySelector('.close-modal');
+
+            // 为每个视频卡片生成预览图
+            videoCards.forEach(card => {
+                const videoSrc = card.dataset.video;
+                const canvas = card.querySelector('canvas');
+                const tempVideo = document.createElement('video');
+                
+                tempVideo.src = videoSrc;
+                tempVideo.crossOrigin = 'anonymous'; // 如果视频在不同域
+                
+                // 当视频加载完成后，在特定时间点捕获帧
+                tempVideo.addEventListener('loadeddata', function() {
+                    // 设置到视频30%处的时间点
+                    tempVideo.currentTime = tempVideo.duration * 0.3;
+                });
+                
+                // 当视频跳转到指定时间点后
+                tempVideo.addEventListener('seeked', function() {
+                    // 设置canvas尺寸
+                    canvas.width = tempVideo.videoWidth;
+                    canvas.height = tempVideo.videoHeight;
+                    
+                    // 在canvas上绘制视频帧
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(tempVideo, 0, 0, canvas.width, canvas.height);
+                    
+                    // 清理临时视频元素
+                    tempVideo.remove();
+                });
+            });
+
+            // 打开视频弹窗
+            videoCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const videoSrc = this.dataset.video;
+                    modalVideo.src = videoSrc;
+                    videoModal.style.display = 'flex';
+                    modalVideo.play();
+                });
+            });
+
+            // 关闭视频弹窗
+            closeModal.addEventListener('click', function() {
+                modalVideo.pause();
+                modalVideo.src = '';
+                videoModal.style.display = 'none';
+            });
+
+            // 点击弹窗外部关闭
+            videoModal.addEventListener('click', function(e) {
+                if (e.target === videoModal) {
+                    modalVideo.pause();
+                    modalVideo.src = '';
+                    videoModal.style.display = 'none';
+                }
+            });
+
+            // ESC键关闭弹窗
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && videoModal.style.display === 'flex') {
+                    modalVideo.pause();
+                    modalVideo.src = '';
+                    videoModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
-</html>
+</html> 
