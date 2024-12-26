@@ -165,26 +165,6 @@
             box-shadow: 0 8px 20px rgba(196, 160, 109, 0.4);
             background: linear-gradient(45deg, #b3905d, #d1b681);
         }
-
-        /* 音乐播放器位置调整 */
-        .music-player {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .music-disc {
-            background: linear-gradient(45deg, #c4a06d, #e2c792);
-        }
-
-        .music-control {
-            background: #fff;
-        }
-
-        .music-disc::before {
-            border-color: #fff;
-        }
     </style>
 </head>
 <body>
@@ -226,14 +206,6 @@
                     </a>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- 音乐播放器 -->
-    <div class="music-player">
-        <audio id="bgMusic" src="media/1.mp3" loop></audio>
-        <div class="music-disc">
-            <div class="music-control"></div>
         </div>
     </div>
 

@@ -12,9 +12,244 @@
     <style>
         /* 全局样式优化 */
         body {
-            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
-            color: #fff;
+            margin: 0;
+            padding: 0;
+            background: #f7f5f0;
+            color: #333;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 和风背景样式 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                /* 斜线纹理 */
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(196, 160, 109, 0.08) 0px,
+                    rgba(196, 160, 109, 0.08) 1px,
+                    transparent 1px,
+                    transparent 20px
+                ),
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(196, 160, 109, 0.08) 0px,
+                    rgba(196, 160, 109, 0.08) 1px,
+                    transparent 1px,
+                    transparent 20px
+                ),
+                /* 波纹背景 */
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(196, 160, 109, 0.1) 0%,
+                    transparent 50%
+                ),
+                radial-gradient(
+                    circle at 0% 100%,
+                    rgba(196, 160, 109, 0.1) 0%,
+                    transparent 50%
+                ),
+                /* 主背景 */
+                linear-gradient(
+                    to bottom,
+                    #fff 0%,
+                    #f7f5f0 100%
+                );
+            z-index: -1;
+            opacity: 1;
+        }
+
+        /* 装饰性波纹背景 */
+        .yys {
+            position: relative;
+            min-height: 100vh;
+            background: 
+                /* 波纹装饰 */
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(196, 160, 109, 0.03) 0px,
+                    rgba(196, 160, 109, 0.03) 1px,
+                    transparent 1px,
+                    transparent 30px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(196, 160, 109, 0.03) 0px,
+                    rgba(196, 160, 109, 0.03) 1px,
+                    transparent 1px,
+                    transparent 30px
+                );
+        }
+
+        /* 页面顶部装饰条 */
+        .yys::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(196, 160, 109, 0.8) 20%,
+                rgba(226, 199, 146, 1) 50%,
+                rgba(196, 160, 109, 0.8) 80%,
+                transparent
+            );
+            z-index: 1000;
+        }
+
+        /* 页面底部装饰波纹 */
+        .yys::after {
+            content: '';
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            background: 
+                linear-gradient(
+                    to top,
+                    rgba(196, 160, 109, 0.05) 0%,
+                    transparent 100%
+                ),
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(196, 160, 109, 0.03) 0px,
+                    rgba(196, 160, 109, 0.03) 1px,
+                    transparent 1px,
+                    transparent 20px
+                );
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* 游戏攻略区域背景 */
+        .game {
+            position: relative;
+            background: linear-gradient(
+                rgba(196, 160, 109, 0.05),
+                rgba(196, 160, 109, 0.02)
+            );
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .game::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(196, 160, 109, 0.02) 0px,
+                    rgba(196, 160, 109, 0.02) 1px,
+                    transparent 1px,
+                    transparent 10px
+                );
+            border-radius: inherit;
+            z-index: -1;
+        }
+
+        /* 同人手账区域背景 */
+        .tongren {
+            position: relative;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tongren::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(
+                    circle at 30% 30%,
+                    rgba(196, 160, 109, 0.05) 0%,
+                    transparent 60%
+                ),
+                radial-gradient(
+                    circle at 70% 70%,
+                    rgba(196, 160, 109, 0.05) 0%,
+                    transparent 60%
+                );
+            border-radius: inherit;
+            z-index: -1;
+        }
+
+        /* 试听盛宴区域背景 */
+        .shiting {
+            position: relative;
+            background: linear-gradient(
+                rgba(255, 255, 255, 0.9),
+                rgba(255, 255, 255, 0.7)
+            );
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .shiting::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg,
+                    rgba(196, 160, 109, 0.03) 25%,
+                    transparent 25%,
+                    transparent 75%,
+                    rgba(196, 160, 109, 0.03) 75%
+                );
+            background-size: 20px 20px;
+            border-radius: inherit;
+            z-index: -1;
+        }
+
+        /* 泛娱乐区域背景 */
+        .fun {
+            position: relative;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .fun::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-radial-gradient(
+                    circle at 50% 50%,
+                    rgba(196, 160, 109, 0.02) 0,
+                    rgba(196, 160, 109, 0.02) 1px,
+                    transparent 1px,
+                    transparent 100%
+                ) 0 0/30px 30px;
+            border-radius: inherit;
+            z-index: -1;
         }
 
         /* 导航样式优化 */
@@ -34,68 +269,92 @@
         .nav-wrap li {
             background: none;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
+            transition: all 0.3s ease;
         }
 
-        .nav-wrap li::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        .nav-wrap li:hover {
             background: rgba(255, 255, 255, 0.1);
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-        }
-
-        .nav-wrap li:hover::before {
-            transform: translateX(0);
         }
 
         .nav-wrap li a {
             font-weight: 500;
             position: relative;
             z-index: 1;
+            transition: all 0.3s ease;
         }
 
-        /* 下拉菜单优化 */
+        /* 下拉菜单样式 */
         .submenu {
-            background: rgba(0, 0, 0, 0.95);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 160px;
+            background: rgba(20, 20, 20, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 0 0 8px 8px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             border-top: 2px solid #c4a06d;
-            transform-origin: top;
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
         }
 
         .nav-wrap li:hover .submenu {
-            transform: scaleY(1);
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
 
         .submenu a {
+            display: block;
+            padding: 10px 20px;
+            color: #fff;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
             position: relative;
-            padding-left: 30px;
+        }
+
+        .submenu a:hover {
+            background: rgba(196, 160, 109, 0.2);
+            color: #c4a06d;
+            padding-left: 25px;
         }
 
         .submenu a::before {
             content: '';
             position: absolute;
-            left: 15px;
+            left: 10px;
             top: 50%;
             width: 4px;
             height: 4px;
             background: #c4a06d;
             border-radius: 50%;
-            transform: translateY(-50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            transform: translateY(-50%) scale(0);
+            transition: all 0.3s ease;
         }
 
         .submenu a:hover::before {
-            opacity: 1;
+            transform: translateY(-50%) scale(1);
+        }
+
+        /* 导航激活状态 */
+        .nav-wrap li.nav-active > a {
+            color: #c4a06d;
+        }
+
+        .nav-wrap li.nav-active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 2px;
+            background: #c4a06d;
         }
 
         /* Banner优化 */
@@ -209,17 +468,17 @@
         .music-player {
             position: fixed;
             top: 20px;
-            right: 25px;
+            right: 20px;
             z-index: 1000;
             width: 36px;
             height: 36px;
         }
 
         .music-disc {
+            background: linear-gradient(45deg, #c4a06d, #e2c792);
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: rgba(0, 0, 0, 0.5);
             position: relative;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -233,7 +492,6 @@
 
         .music-disc:hover {
             transform: scale(1.1);
-            background: rgba(0, 0, 0, 0.6);
         }
 
         .music-disc::before {
@@ -243,19 +501,13 @@
             left: -1px;
             right: -1px;
             bottom: -1px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid #fff;
             border-radius: 50%;
             animation: ripple 2s linear infinite;
         }
 
-        .music-disc::after {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 10px;
+        .music-control {
             background: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
         }
 
         @keyframes ripple {
@@ -313,10 +565,10 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#">式神图鉴</a>
+                    <a href="#">式神���鉴</a>
                     <div class="submenu">
                         <a href="#">SSR式神</a>
-                        <a href="#">SR��神</a>
+                        <a href="#">SR式神</a>
                         <a href="#">R式神</a>
                         <a href="#">N式神</a>
                     </div>
@@ -432,7 +684,7 @@
                     <div>
                         <a href="#">
                             <img src="images/ebda40a6-c7e4-4483-bd0e-48427ef1dd42.png" alt="">
-                            <span>�����夕织梦</span>
+                            <span>夕织梦</span>
                             <span>活动攻略</span>
                         </a>
                     </div>
