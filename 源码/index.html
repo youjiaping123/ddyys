@@ -341,9 +341,16 @@
             transform: translateY(-50%) scale(1);
         }
 
-        /* 导航激活状态 */
+        /* 导航激活状态优化 */
+        .nav-wrap li.nav-active {
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
         .nav-wrap li.nav-active > a {
-            color: #c4a06d;
+            color: #fff;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .nav-wrap li.nav-active::after {
@@ -354,7 +361,16 @@
             transform: translateX(-50%);
             width: 30px;
             height: 2px;
-            background: #c4a06d;
+            background: #fff;
+            box-shadow: 0 1px 4px rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-wrap li.nav-active .submenu {
+            border-top: 2px solid #fff;
+        }
+
+        .nav-wrap li.nav-active:hover > a {
+            color: #fff;
         }
 
         /* Banner优化 */
@@ -525,7 +541,7 @@
 <body>
 <!--最外层的容器-->
 <div class="yys">
-    <!--头部开始-->
+    <!--��部开始-->
     <div class="header">
         <div class="menu">游戏全目录</div>
         <a href="#">
@@ -549,11 +565,11 @@
         <div class="nav-wrap">
             <ul>
                 <li class="nav-active">
-                    <a href="#">官网首页</a>
+                    <a href="index.html">官网首页</a>
                     <div class="submenu">
-                        <a href="#">最新公告</a>
-                        <a href="#">热门活动</a>
-                        <a href="#">游戏下载</a>
+                        <a href="index.html#news">最新公告</a>
+                        <a href="index.html#events">热门活动</a>
+                        <a href="index.html#download">游戏下载</a>
                     </div>
                 </li>
                 <li>
@@ -565,7 +581,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#">式神���鉴</a>
+                    <a href="#">式神图鉴</a>
                     <div class="submenu">
                         <a href="#">SSR式神</a>
                         <a href="#">SR式神</a>
@@ -848,7 +864,7 @@
                     isPlaying = true;
                     musicPlayer.classList.add('playing');
                 }).catch(error => {
-                    console.log("需要用户交互才能播放音频");
+                    console.log("需要用户交互才能��放音频");
                     isPlaying = false;
                     musicPlayer.classList.remove('playing');
                 });
