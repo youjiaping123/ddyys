@@ -323,38 +323,61 @@
     document.addEventListener('DOMContentLoaded', function() {
         const musicPlayer = document.querySelector('.music-disc');
         const audio = document.getElementById('bgMusic');
-        let isPlaying = true; // 默认为播放状态
+        let isPlaying = false;
 
-        // 初始化时添加播放样式
-        musicPlayer.classList.add('playing');
+        // 优化音频加载
+        audio.preload = 'metadata';
+        
+        // 初始化音乐播放器
+        function initMusicPlayer() {
+            // 检查是否支持自动播放
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isPlaying = true;
+                    musicPlayer.classList.add('playing');
+                }).catch(error => {
+                    console.log("需要用户交互才能播放音频");
+                    isPlaying = false;
+                    musicPlayer.classList.remove('playing');
+                });
+            }
+        }
 
-        // 由于浏览器政策，可能需要用户交互才能播放
-        // 尝试自动播放
-        audio.play().catch(function(error) {
-            console.log("Auto-play was prevented");
-            isPlaying = false;
-            musicPlayer.classList.remove('playing');
-        });
-
-        // 点击播放/暂停
-        musicPlayer.addEventListener('click', function() {
+        // 处理播放/暂停
+        function togglePlay() {
             if (isPlaying) {
                 audio.pause();
                 musicPlayer.classList.remove('playing');
             } else {
-                audio.play();
-                musicPlayer.classList.add('playing');
+                audio.play().then(() => {
+                    musicPlayer.classList.add('playing');
+                }).catch(error => {
+                    console.log("播放失败:", error);
+                });
             }
             isPlaying = !isPlaying;
-        });
+        }
 
-        // 音乐播放完毕后重置状态（虽然设置了loop，以防万一）
-        audio.addEventListener('ended', function() {
-            if (!audio.loop) { // 如果没有循环播放
+        // 事件监听
+        musicPlayer.addEventListener('click', togglePlay);
+        
+        // 音频事件处理
+        audio.addEventListener('ended', () => {
+            if (!audio.loop) {
                 isPlaying = false;
                 musicPlayer.classList.remove('playing');
             }
         });
+
+        audio.addEventListener('error', (e) => {
+            console.log("音频加载错误:", e);
+            isPlaying = false;
+            musicPlayer.classList.remove('playing');
+        });
+
+        // 初始化
+        initMusicPlayer();
     });
 </script>
 
