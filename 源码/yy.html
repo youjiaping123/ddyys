@@ -4,66 +4,173 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>阴阳师-音乐</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/yys.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            background-color: #E1ACAC;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(20, 20, 20, 0.9));
+            min-height: 100vh;
             font-family: "Microsoft YaHei", sans-serif;
             line-height: 1.6;
+            position: relative;
+            color: #fff;
         }
-        
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("images/shishen_btn_bg_405a749.png") repeat;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 0;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
         }
-        
+
         .title {
-            color: #000000;
             text-align: center;
+            padding: 40px 0;
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .title h1 {
+            color: #c4a06d;
             font-size: 48px;
             font-family: "方正姚体", sans-serif;
-            padding: 30px 0;
-            background-color: #FFFFFF;
-            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(196, 160, 109, 0.3);
+            letter-spacing: 5px;
+            margin-bottom: 20px;
         }
-        
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #c4a06d 20%, #e2c792 50%, #c4a06d 80%, transparent);
+        }
+
         .music-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
             padding: 20px;
-            background-color: #FFFFFF;
         }
-        
+
         .music-item {
-            padding: 20px;
+            background: rgba(196, 160, 109, 0.05);
+            border: 1px solid rgba(196, 160, 109, 0.1);
+            border-radius: 15px;
+            padding: 30px;
             text-align: center;
-            background-color: #FFFFFF;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
-        
+
         .music-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            background: rgba(196, 160, 109, 0.1);
+            border-color: rgba(196, 160, 109, 0.3);
+            box-shadow: 0 15px 30px rgba(196, 160, 109, 0.2);
         }
-        
-        a {
+
+        .music-item h2 {
+            color: #c4a06d;
+            font-size: 24px;
+            font-family: "方正姚体", sans-serif;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .music-item h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #c4a06d, transparent);
+            transition: all 0.4s ease;
+        }
+
+        .music-item:hover h2::after {
+            width: 80px;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 30px;
+            background: transparent;
+        }
+
+        audio::-webkit-media-controls-panel {
+            background: linear-gradient(45deg, rgba(196, 160, 109, 0.1), rgba(226, 199, 146, 0.2));
+            border: 1px solid rgba(196, 160, 109, 0.2);
+        }
+
+        audio::-webkit-media-controls-play-button,
+        audio::-webkit-media-controls-mute-button {
+            background-color: #c4a06d;
+            border-radius: 50%;
+        }
+
+        audio::-webkit-media-controls-timeline {
+            background-color: rgba(196, 160, 109, 0.3);
+            border-radius: 10px;
+            margin: 0 15px;
+        }
+
+        audio::-webkit-media-controls-current-time-display,
+        audio::-webkit-media-controls-time-remaining-display {
+            color: #c4a06d;
+        }
+
+        .back-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #c4a06d, #e2c792);
+            color: #fff;
             text-decoration: none;
-            color: inherit;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(196, 160, 109, 0.3);
+        }
+
+        .back-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196, 160, 109, 0.4);
+            background: linear-gradient(45deg, #b3905d, #d1b681);
         }
     </style>
 </head>
 <body>
+    <a href="shiting.html" class="back-home">返回视听中心</a>
     <div class="container">
-        <h1 class="title">
-            <a href="yy.html">音乐</a>
-        </h1>
+        <div class="title">
+            <h1>音乐</h1>
+        </div>
         <div class="music-grid">
             <div class="music-item">
                 <h2>主题曲</h2>
